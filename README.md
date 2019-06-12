@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/cry4hurrle/cry4hurrle/_apis/build/status/atzedent.globkit?branchName=master)](https://dev.azure.com/cry4hurrle/cry4hurrle/_build/latest?definitionId=1&branchName=master)
+
 # Globkit
 
 Search any tree-like data structure with wildcard and globbing patterns.
