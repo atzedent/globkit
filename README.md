@@ -16,7 +16,7 @@ The code is deliberately kept simple so as not to distract from the actual goal.
 
 ## Getting started
 
-Either [clone the repo](#Clone The Repo) and add the project to your code-base or [reference the nuget package](#Reference The NuGet Package).
+Either [clone the repo](#Clone-The-Repo) and add the project to your code-base or [reference the nuget package](#Reference-The-NuGet-Package).
 
 ### Prerequisites
 
@@ -100,7 +100,7 @@ class FilesystemSearchTree : ISearchTree {
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to be, learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
