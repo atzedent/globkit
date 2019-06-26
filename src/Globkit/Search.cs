@@ -68,22 +68,22 @@ namespace Globkit
         private SearchAgent BuildSearch(string pattern)
         {
             var expressions = BuildExpressions(pattern);
-            var searchExpressions = expressions.Select(GetSearchExpressionFor).ToList();
+            var searchAgents = expressions.Select(GetSearchAgent).ToArray();
 
-            return Enumerable.Reverse(searchExpressions).Aggregate((a, b) =>
+            return Enumerable.Reverse(searchAgents).Aggregate((a, b) =>
             {
                 b.Next = a;
                 return b;
             });
         }
 
-        private SearchAgent GetSearchExpressionFor(string expression)
+        private SearchAgent GetSearchAgent(string expression)
         {
-            if (IsRecursiveDirectoryExpression(expression))
+            if (IsRecursiveBranchExpression(expression))
                 return new RecursiveBranchAgent(expression.Trim(_searchTree.PathSeparator), _searchTree);
-            if (IsDirectoryExpression(expression))
+            if (IsBranchExpression(expression))
                 return new BranchAgent(expression.Trim(_searchTree.PathSeparator), _searchTree);
-            if (IsFileExpression(expression))
+            if (IsLeafExpression(expression))
                 return new LeafAgent(expression.Trim(_searchTree.PathSeparator), _searchTree);
 
             return new NoSearchAgent(expression, _searchTree);
@@ -104,18 +104,18 @@ namespace Globkit
             return expressions;
         }
 
-        private bool IsRecursiveDirectoryExpression(string expression)
+        private bool IsRecursiveBranchExpression(string expression)
         {
             var recPattern = $"**{_searchTree.PathSeparator}";
             return expression == recPattern;
         }
 
-        private bool IsDirectoryExpression(string expression)
+        private bool IsBranchExpression(string expression)
         {
             return expression.IndexOf(_searchTree.PathSeparator) > -1;
         }
 
-        private bool IsFileExpression(string expression)
+        private bool IsLeafExpression(string expression)
         {
             return expression.IndexOf(_searchTree.PathSeparator) < 0;
         }
