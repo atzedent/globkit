@@ -79,10 +79,12 @@ namespace Globkit.Tests
         public IEnumerable<string> GetBranches(string path, string filter)
         {
             var exists = TryGetBranch(path, out var branch);
-            return !exists
-                ? Enumerable.Empty<string>()
-                : branch.Branches.Select(b => CombinePaths(path, b.Name))
-                    .Where(n => Regex.IsMatch(n, filter));
+            if (!exists) return Enumerable.Empty<string>();
+            var result = new List<string>();
+            foreach (var b in branch.Branches)
+                if (Regex.IsMatch(b.Name, Mask(filter)))
+                    result.Add(CombinePaths(path, b.Name));
+            return result;
         }
 
         public IEnumerable<string> GetLeaves(string path)
@@ -96,16 +98,15 @@ namespace Globkit.Tests
         public IEnumerable<string> GetLeaves(string path, string filter)
         {
             var exists = TryGetBranch(path, out var branch);
-            return !exists
-                ? Enumerable.Empty<string>()
-                : branch.Leaves.Select(l => CombinePaths(path, l.Name))
-                    .Where(n => Regex.IsMatch(n, filter));
+            if (!exists) return Enumerable.Empty<string>();
+            var result = new List<string>();
+            foreach (var l in branch.Leaves)
+                if (Regex.IsMatch(l.Name, Mask(filter)))
+                    result.Add(CombinePaths(path, l.Name));
+            return result;
         }
 
-        public IEnumerable<string> GetTreeRoots()
-        {
-            return Roots.Select(r => r.Name);
-        }
+        public IEnumerable<string> GetTreeRoots() => Roots.Select(r => r.Name);
 
         private bool TryGetBranch(string path, out Branch branch)
         {
@@ -156,6 +157,8 @@ namespace Globkit.Tests
 
             head.Leaves.Add(new Leaf(parts.Last()));
         }
+
+        private static string Mask(string value) => $"^{Regex.Escape(value).Replace("\\*", ".*")}$";
     }
 
     public abstract class TreeItem

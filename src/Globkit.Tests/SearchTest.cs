@@ -50,9 +50,10 @@ namespace Globkit.Tests
         {
             const string leafPath1 = "HUGO/a/b/c";
             const string leafPath2 = "BERTA/a/b/c";
-            var searchTree = new TestSearchTree(new[] { "HUGO", "BERTA" }, leafPath1, leafPath2);
+            const string leafPath3 = "BERTA/a2/b/c";
+            var searchTree = new TestSearchTree(new[] { "HUGO", "BERTA" }, leafPath1, leafPath2, leafPath3);
             var search = new Search(searchTree);
-            var result = search.FindLeaves("**/a/b/c");
+            var result = search.FindLeaves("**/a/*b*/*c*");
             Assert.Collection(result,
                 s => Assert.Equal(leafPath1, s),
                 s => Assert.Equal(leafPath2, s));
