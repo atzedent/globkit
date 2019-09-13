@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace Globkit.SearchAgents
 {
     internal class NoSearchAgent : SearchAgent
     {
         public NoSearchAgent(string expression, ISearchTree searchTree) : base(expression, searchTree) { }
-        protected override void PerformSearch(string path, ICollection<string> results) { }
+        protected override IEnumerable<string> PerformSearch(string path) { return Enumerable.Empty<string>(); }
     }
 }

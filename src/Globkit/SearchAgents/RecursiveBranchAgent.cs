@@ -8,15 +8,18 @@ namespace Globkit.SearchAgents
         {
         }
 
-        protected override void PerformSearch(string path, ICollection<string> results)
+        protected override IEnumerable<string> PerformSearch(string path)
         {
-            if (Next == null) return;
-
-            Next.Search(path, results);
-            foreach (var dir in SearchTree.GetBranches(path))
+            if (Next != null)
             {
-                var nextDir = SearchTree.CombinePaths(path, dir);
-                PerformSearch(nextDir, results);
+                foreach (var dir in Next.Search(path))
+                    yield return dir;
+                foreach (var dir in SearchTree.GetBranches(path))
+                {
+                    var nextDir = SearchTree.CombinePaths(path, dir);
+                    foreach (var d in PerformSearch(nextDir))
+                        yield return d;
+                }
             }
         }
     }

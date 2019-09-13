@@ -1,7 +1,6 @@
 ﻿using Globkit.SearchAgents;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Globkit
 {
@@ -17,18 +16,15 @@ namespace Globkit
         public IEnumerable<string> FindLeaves(string pattern)
         {
             var roots = GetRoots(pattern).ToList();
-            var results = new List<IEnumerable<string>>();
-            Parallel.ForEach(roots, root =>
+            foreach (var root in roots)
             {
-                var r = new List<string>();
-                results.Add(r);
                 var startPattern = pattern.StartsWith(root)
                     ? pattern.Substring(root.Length)
                     : pattern;
                 var agent = BuildSearch(startPattern);
-                agent.Search(root, r);
-            });
-            return results.SelectMany(r => r);
+                foreach (var result in agent.Search(root))
+                    yield return result;
+            }
         }
 
         private IEnumerable<string> GetRoots(string pattern)

@@ -13,11 +13,11 @@ namespace Globkit.SearchAgents
             SearchTree = searchTree;
         }
 
-        public void Search(string path, ICollection<string> results)
+        public IEnumerable<string> Search(string path)
         {
-            PerformSearch(path, results);
+            return PerformSearch(path);
         }
 
-        protected abstract void PerformSearch(string path, ICollection<string> results);
+        protected abstract IEnumerable<string> PerformSearch(string path);
     }
 }
