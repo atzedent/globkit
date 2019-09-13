@@ -12,6 +12,9 @@
     <PackageTags>search wildcard glob globbing tree</PackageTags>
     <NeutralLanguage></NeutralLanguage>
     <PackageReleaseNotes>Search any tree-like data structure with wildcard and globbing patterns.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
