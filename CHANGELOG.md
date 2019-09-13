@@ -12,7 +12,6 @@
 
 - Rename private methods.
 
-## Compare changes
 
 [1.0.2]: https://github.com/atzedent/globkit/compare/v1.0.2..v1.0.1
 [1.0.1]: https://github.com/atzedent/globkit/compare/v1.0.1..v1.0.0
