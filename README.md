@@ -31,7 +31,7 @@ git clone https://github.com/atzedent/globkit.git
 ### Reference The NuGet Package
 
 ```sh
-dotnet add package Globkit --version 1.0.1
+dotnet add package Globkit --version 1.0.2
 ```
 
 ## Usage
