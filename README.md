@@ -97,6 +97,7 @@ class FilesystemSearchTree : ISearchTree {
 	}
 }
 ```
+Try it [here](https://dotnetfiddle.net/36tWvc) for yourself
 
 ## Contributing
 
